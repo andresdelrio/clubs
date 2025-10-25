@@ -1,0 +1,126 @@
+.enrollment-manager {
+  display: grid;
+  gap: 2rem;
+}
+
+.assign-card,
+.report-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.85rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+}
+
+.assign-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.assign-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.assign-form label,
+.filters label {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.assign-form select,
+.assign-form input,
+.filters select,
+.filters input {
+  border: 1px solid #d1d5db;
+  border-radius: 0.65rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.report-header h2 {
+  margin: 0;
+}
+
+.filters {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.report-table {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.club-report {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.club-report header {
+  padding: 1rem 1.25rem;
+  background: #eff6ff;
+}
+
+.club-report h3 {
+  margin: 0 0 0.25rem;
+}
+
+.club-report table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.club-report th,
+.club-report td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.row-actions select {
+  border: 1px solid #cbd5f5;
+  border-radius: 0.6rem;
+  padding: 0.4rem 0.6rem;
+}
+
+.danger-button {
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.feedback--error {
+  color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+  .report-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

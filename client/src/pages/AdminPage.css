@@ -1,0 +1,126 @@
+.admin-access {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(circle at top, #dbeafe, #e5e7eb);
+}
+
+.access-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1.1rem;
+  box-shadow: 0 20px 60px -35px rgba(29, 78, 216, 0.6);
+  display: grid;
+  gap: 1.25rem;
+  max-width: 420px;
+  width: 100%;
+}
+
+.access-card h1 {
+  margin: 0;
+  color: #1e3a8a;
+  font-size: 2rem;
+}
+
+.access-card p {
+  margin: 0;
+  color: #475569;
+}
+
+.access-card label {
+  display: grid;
+  gap: 0.5rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.access-card input {
+  border: 1px solid #cbd5f5;
+  border-radius: 0.65rem;
+  padding: 0.75rem 0.85rem;
+  font-size: 1rem;
+}
+
+.admin-dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.dashboard-header h1 {
+  margin: 0 0 0.35rem;
+  font-size: 2.2rem;
+  color: #1f2937;
+}
+
+.dashboard-header p {
+  margin: 0;
+  color: #4b5563;
+}
+
+.dashboard-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.tab-button {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  padding: 0.65rem 1.1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #374151;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab-button--active {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  color: #ffffff;
+}
+
+.dashboard-content {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 12px 32px -24px rgba(15, 23, 42, 0.55);
+  padding: 1.5rem;
+}
+
+.feedback {
+  margin: 0;
+}
+
+.feedback--error {
+  color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}

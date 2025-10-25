@@ -1,0 +1,65 @@
+.importer {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.importer-form {
+  display: grid;
+  gap: 1rem;
+  border: 1px dashed #93c5fd;
+  border-radius: 0.85rem;
+  padding: 1.5rem;
+  background: rgba(219, 234, 254, 0.4);
+}
+
+.importer-form h2 {
+  margin: 0;
+}
+
+.importer-form p {
+  margin: 0;
+  color: #374151;
+}
+
+.importer-form input[type='file'] {
+  border: 1px solid #bfdbfe;
+  border-radius: 0.6rem;
+  padding: 0.75rem;
+  background: #ffffff;
+}
+
+.import-result {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.85rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+}
+
+.import-result h3 {
+  margin: 0 0 1rem;
+}
+
+.result-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.result-grid h4 {
+  margin: 0 0 0.5rem;
+}
+
+.result-grid ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #374151;
+}
+
+.feedback--error {
+  color: #b91c1c;
+}
+
+@media (min-width: 900px) {
+  .result-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
