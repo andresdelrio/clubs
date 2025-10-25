@@ -35,18 +35,28 @@ app.use('/api', routes);
 // Serve frontend build when available
 const clientDist = path.join(__dirname, '../client/dist');
 const clientIndex = path.join(clientDist, 'index.html');
-if (fs.existsSync(clientIndex)) {
-  app.use(express.static(clientDist));
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) {
-      return next();
+const basePathEnv = process.env.APP_BASE_PATH || '/';
+const basePath = basePathEnv === '/' ? '/' : `/${basePathEnv.replace(/^\/|\/$/g, '')}`;
+
+const serveIndex = (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
+  res.sendFile(clientIndex, (err) => {
+    if (err) {
+      next(err);
     }
-    res.sendFile(clientIndex, (err) => {
-      if (err) {
-        next(err);
-      }
-    });
   });
+};
+
+if (fs.existsSync(clientIndex)) {
+  if (basePath === '/') {
+    app.use(express.static(clientDist));
+    app.get('*', serveIndex);
+  } else {
+    app.use(basePath, express.static(clientDist));
+    app.get([basePath, `${basePath}/*`], serveIndex);
+  }
 }
 
 app.use(notFoundHandler);

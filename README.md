@@ -27,7 +27,7 @@ Aplicación monolítica construida con Node.js (Express) y React para administra
 
 ## Configuración
 
-1. Crea un archivo `.env` en la raíz basado en `.env.example` y completa las variables de conexión a MySQL y el código de acceso admin.
+1. Crea un archivo `.env` en la raíz basado en `.env.example` y completa las variables de conexión a MySQL, el código de acceso admin y, si la app vive en un subdirectorio (p. ej. `/clubs`), ajusta `APP_BASE_PATH`.
 2. Crea la base de datos y ejecuta:
 
    ```sql
