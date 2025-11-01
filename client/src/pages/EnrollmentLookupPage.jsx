@@ -91,7 +91,7 @@ export default function EnrollmentLookupPage() {
                 type="button"
                 className="secondary-button"
                 onClick={() => {
-                  window.location.href = '/';
+                  window.location.href = import.meta.env.BASE_URL || '/';
                 }}
               >
                 Volver al inicio
@@ -108,7 +108,7 @@ export default function EnrollmentLookupPage() {
                 type="button"
                 className="secondary-button"
                 onClick={() => {
-                  window.location.href = '/';
+                  window.location.href = import.meta.env.BASE_URL || '/';
                 }}
               >
                 Volver al inicio

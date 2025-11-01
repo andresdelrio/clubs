@@ -88,14 +88,14 @@ export default function EnrollmentModal({ club, onClose, onSuccess }) {
                 >
                   Cerrar
                 </button>
-                <button
-                  type="button"
-                  className="primary-button"
-                  onClick={() => {
-                    onClose();
-                    window.location.href = '/';
-                  }}
-                >
+              <button
+                type="button"
+                className="primary-button"
+                onClick={() => {
+                  onClose();
+                  window.location.href = import.meta.env.BASE_URL || '/';
+                }}
+              >
                   Volver al inicio
                 </button>
               </div>

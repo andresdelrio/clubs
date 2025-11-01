@@ -69,6 +69,114 @@ Durante el desarrollo suele ejecutarse el backend (`npm run dev`) y el frontend 
 └── README.md
 ```
 
+## Deployment en cPanel con Node.js
+
+Para desplegar la aplicación en un servidor compartido con cPanel bajo un subdirectorio (ej: `https://tudominio.com/clubs`):
+
+### 1. Preparar el build localmente
+
+1. **Configurar variables de entorno para producción:**
+
+   Edita el archivo `.env` en la raíz con los datos de tu servidor:
+   ```bash
+   PORT=3000  # cPanel asignará el puerto automáticamente
+   ADMIN_ACCESS_CODE=tu-codigo-seguro
+
+   # Base path configuration (debe coincidir con la ruta de tu app en cPanel)
+   APP_BASE_PATH=/clubs
+   VITE_BASE_PATH=/clubs
+
+   # Database credentials (desde cPanel -> MySQL Databases)
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_USER=cpanel_user_dbuser
+   DB_PASSWORD=tu_password_mysql
+   DB_NAME=cpanel_user_clubs_db
+   DB_CONNECTION_LIMIT=10
+   ```
+
+2. **Configurar el cliente para producción:**
+
+   Edita `client/.env.production`:
+   ```bash
+   # Usa tu dominio real
+   VITE_API_BASE_URL=https://tudominio.com/clubs/api
+   ```
+
+3. **Build del frontend:**
+   ```bash
+   npm run build
+   ```
+
+### 2. Configurar en cPanel
+
+1. **Setup Node.js Application:**
+   - Ve a cPanel → Software → Setup Node.js App
+   - Click "Create Application"
+   - Configuración:
+     - Node.js version: 18.x o superior
+     - Application mode: Production
+     - Application root: Ruta donde subirás el código (ej: `/home/usuario/clubs`)
+     - Application URL: `clubs` (esto creará la ruta `/clubs`)
+     - Application startup file: `server.js`
+
+2. **Subir archivos:**
+   - Sube TODOS los archivos del proyecto excepto:
+     - `node_modules/`
+     - `client/node_modules/`
+     - `.env.local`
+   - Asegúrate de incluir:
+     - Todo el código fuente (`src/`, `client/`, `data/`)
+     - `package.json` y `package-lock.json`
+     - `server.js`
+     - `client/dist/` (generado con `npm run build`)
+     - `.env` (con las credenciales de producción)
+
+3. **Instalar dependencias:**
+   - En cPanel → Setup Node.js App → Tu aplicación
+   - Click en "Run NPM Install"
+   - Espera a que termine la instalación
+
+4. **Configurar variables de entorno en cPanel:**
+   - En la configuración de la aplicación Node.js
+   - Agrega las variables de entorno (alternativamente al archivo .env):
+     ```
+     DB_HOST=localhost
+     DB_USER=cpanel_user_dbuser
+     DB_PASSWORD=tu_password
+     DB_NAME=cpanel_user_clubs_db
+     APP_BASE_PATH=/clubs
+     ADMIN_ACCESS_CODE=tu-codigo
+     ```
+
+5. **Iniciar la aplicación:**
+   - Click en "Start App" o "Restart"
+
+### 3. Configurar la base de datos
+
+1. En cPanel → MySQL Databases:
+   - Crea la base de datos (ej: `cpanel_user_clubs_db`)
+   - Crea un usuario y asígnalo a la base de datos
+   - Anota las credenciales
+
+2. En cPanel → phpMyAdmin:
+   - Selecciona tu base de datos
+   - Ejecuta el contenido de `data/schema.sql`
+   - Ejecuta el contenido de `data/seeds.sql`
+
+### 4. Verificar
+
+- Accede a `https://tudominio.com/clubs`
+- La aplicación debería estar funcionando
+
+### Notas importantes para cPanel:
+
+- **Puerto:** cPanel asigna automáticamente el puerto, no uses la variable PORT del .env
+- **Application URL:** Debe coincidir con `APP_BASE_PATH` (sin la barra inicial)
+- **Restart:** Después de cualquier cambio en el código, debes reiniciar la aplicación desde cPanel
+- **Logs:** Revisa los logs en cPanel → Setup Node.js App → Ver logs si hay errores
+- **.htaccess:** cPanel genera automáticamente el proxy reverso, no necesitas configurar nginx/apache manualmente
+
 ## Notas adicionales
 
 - Los archivos CSV deben estar codificados en UTF-8 y contar con encabezados `Sede,Grupo,Nombre,Documento`.
