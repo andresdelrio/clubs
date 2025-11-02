@@ -99,8 +99,8 @@ Para desplegar la aplicación en un servidor compartido con cPanel bajo un subdi
 
    Edita `client/.env.production`:
    ```bash
-   # Usa tu dominio real
-   VITE_API_BASE_URL=https://tudominio.com/clubs/api
+   # IMPORTANTE: NO incluyas /api al final, se agrega automáticamente en el código
+   VITE_API_BASE_URL=https://tudominio.com/clubs
    ```
 
 3. **Build del frontend:**

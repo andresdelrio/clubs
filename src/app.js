@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const path = require('path');
 const fs = require('fs');
 const express = require('express');
@@ -30,18 +28,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', routes);
-
 // Serve frontend build when available
 const clientDist = path.join(__dirname, '../client/dist');
 const clientIndex = path.join(clientDist, 'index.html');
 const basePathEnv = process.env.APP_BASE_PATH || '/';
 const basePath = basePathEnv === '/' ? '/' : `/${basePathEnv.replace(/^\/|\/$/g, '')}`;
 
+// Mount API routes BEFORE static files to ensure they take precedence
+if (basePath === '/') {
+  app.use('/api', routes);
+} else {
+  app.use(`${basePath}/api`, routes);
+}
+
 const serveIndex = (req, res, next) => {
-  if (req.path.startsWith('/api')) {
-    return next();
-  }
   res.sendFile(clientIndex, (err) => {
     if (err) {
       next(err);

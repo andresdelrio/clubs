@@ -1,3 +1,6 @@
+// Load environment variables FIRST, before any other imports
+require('dotenv').config();
+
 const http = require('http');
 const app = require('./src/app');
 
