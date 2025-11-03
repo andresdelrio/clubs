@@ -3,6 +3,7 @@ const express = require('express');
 const publicRoutes = require('./publicRoutes');
 const adminRoutes = require('./adminRoutes');
 const reportRoutes = require('./reportRoutes');
+const configuracionRoutes = require('./configuracionRoutes');
 
 const router = express.Router();
 
@@ -24,6 +25,7 @@ router.get('/health', (req, res) => {
 router.use('/', publicRoutes);
 router.use('/admin', adminRoutes);
 router.use('/reportes', reportRoutes);
+router.use('/configuracion', configuracionRoutes);
 
 module.exports = router;
 

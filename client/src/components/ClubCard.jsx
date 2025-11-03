@@ -1,6 +1,6 @@
 import './ClubCard.css';
 
-export default function ClubCard({ club, onInscribir }) {
+export default function ClubCard({ club, onInscribir, inscripcionesHabilitadas = true }) {
   return (
     <div className="club-card">
       {club.imagenUrl && (
@@ -34,9 +34,18 @@ export default function ClubCard({ club, onInscribir }) {
           type="button"
           className="primary-button"
           onClick={() => onInscribir(club)}
-          disabled={club.cuposDisponibles <= 0}
+          disabled={club.cuposDisponibles <= 0 || !inscripcionesHabilitadas}
+          title={
+            !inscripcionesHabilitadas
+              ? 'Las inscripciones están cerradas temporalmente'
+              : club.cuposDisponibles <= 0
+              ? 'Sin cupos disponibles'
+              : 'Inscribirme en este club'
+          }
         >
-          Inscribirme
+          {!inscripcionesHabilitadas
+            ? 'Inscripciones cerradas'
+            : 'Inscribirme'}
         </button>
       </div>
     </div>

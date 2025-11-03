@@ -15,10 +15,21 @@ export default function SedeClubsPage() {
     [sedeSlug]
   );
   const [selectedClub, setSelectedClub] = useState(null);
+  const [inscripcionesHabilitadas, setInscripcionesHabilitadas] = useState(true);
 
   useEffect(() => {
     setSelectedClub(null);
+    verificarEstadoInscripciones();
   }, [sedeSlug]);
+
+  const verificarEstadoInscripciones = async () => {
+    try {
+      const response = await api.get('/api/configuracion/inscripciones-habilitadas');
+      setInscripcionesHabilitadas(response.data.data.habilitadas);
+    } catch (err) {
+      console.error('Error al verificar estado de inscripciones:', err);
+    }
+  };
 
   const refreshClubs = async () => {
     try {
@@ -50,9 +61,22 @@ export default function SedeClubsPage() {
       {loading && <p>Cargando clubs...</p>}
       {error && <p className="error-text">{error}</p>}
 
+      {!inscripcionesHabilitadas && (
+        <div className="info-banner">
+          <p>
+            ⚠️ Las inscripciones están cerradas temporalmente. Por favor, intenta más tarde.
+          </p>
+        </div>
+      )}
+
       <div className="club-grid">
         {data?.clubs?.map((club) => (
-          <ClubCard key={club.id} club={club} onInscribir={setSelectedClub} />
+          <ClubCard
+            key={club.id}
+            club={club}
+            onInscribir={setSelectedClub}
+            inscripcionesHabilitadas={inscripcionesHabilitadas}
+          />
         ))}
       </div>
 

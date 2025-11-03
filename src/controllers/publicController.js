@@ -1,5 +1,6 @@
 const clubService = require('../services/clubService');
 const enrollmentService = require('../services/enrollmentService');
+const { inscripcionesHabilitadas } = require('../models/configuracionModel');
 const { badRequest } = require('../utils/errors');
 
 async function getSedes(req, res, next) {
@@ -33,6 +34,15 @@ async function getClub(req, res, next) {
 
 async function createEnrollment(req, res, next) {
   try {
+    // Verificar si las inscripciones están habilitadas
+    const habilitadas = await inscripcionesHabilitadas();
+    if (!habilitadas) {
+      return res.status(403).json({
+        success: false,
+        message: 'Las inscripciones están cerradas temporalmente',
+      });
+    }
+
     const { documento, clubId, aceptaAdvertencia } = req.body;
 
     if (aceptaAdvertencia !== true && aceptaAdvertencia !== 'true') {

@@ -5,6 +5,7 @@ import api from '../lib/api';
 import ClubManager from '../components/admin/ClubManager';
 import StudentImporter from '../components/admin/StudentImporter';
 import EnrollmentManager from '../components/admin/EnrollmentManager';
+import InscripcionesToggle from '../components/admin/InscripcionesToggle';
 import './AdminPage.css';
 
 const TABS = [
@@ -101,6 +102,7 @@ export default function AdminPage() {
       </nav>
 
       <section className="dashboard-content">
+        <InscripcionesToggle />
         {activeTab === 'clubs' && <ClubManager />}
         {activeTab === 'estudiantes' && <StudentImporter />}
         {activeTab === 'inscripciones' && <EnrollmentManager />}
