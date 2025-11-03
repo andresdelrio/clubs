@@ -25,7 +25,7 @@ export default function InscripcionesToggle() {
     setError(null);
     try {
       const nuevoEstado = !habilitadas;
-      await api.patch('/api/admin/configuracion/inscripciones', {
+      await api.patch('/api/configuracion/inscripciones', {
         habilitadas: nuevoEstado,
       });
       setHabilitadas(nuevoEstado);
